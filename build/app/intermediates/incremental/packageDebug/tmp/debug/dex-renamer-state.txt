@@ -1,0 +1,4 @@
+#Mon Nov 15 20:57:40 ICT 2021
+base.0=E\:\\Kuliah\\Pemrograman Perangkat Bergerak\\TA_MDP\\ta_mdp\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+renamed.0=classes.dex
+path.0=classes.dex
