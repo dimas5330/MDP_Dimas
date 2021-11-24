@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ta_mdp/pages/home_page.dart';
+import 'package:ta_mdp/pages/navbar.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class _SplashState extends State<Splash> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => HomePage())));
+            MaterialPageRoute(builder: (BuildContext context) => NavBar())));
   }
 
   @override

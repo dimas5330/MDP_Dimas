@@ -18,6 +18,7 @@ class _ProfilePageState extends State<ProfilePage> {
     final user = UserPreferences.myUser;
 
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: buildAppBar(context),
       body: ListView(
         physics: BouncingScrollPhysics(),
@@ -28,8 +29,6 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           const SizedBox(height: 24),
           buildName(user),
-          const SizedBox(height: 24),
-          Center(child: buildUpgradeButton()),
           const SizedBox(height: 24),
           NumbersWidget(),
           const SizedBox(height: 48),
@@ -43,21 +42,16 @@ class _ProfilePageState extends State<ProfilePage> {
         children: [
           Text(
             user.name,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 24, color: Colors.white),
           ),
           const SizedBox(height: 4),
           Text(
             user.email,
-            style: TextStyle(color: Colors.grey),
+            style: TextStyle(color: Colors.white),
           )
         ],
       );
-
-  Widget buildUpgradeButton() => ButtonWidget(
-        text: 'Upgrade To PRO',
-        onClicked: () {},
-      );
-
   Widget buildAbout(User user) => Container(
         padding: EdgeInsets.symmetric(horizontal: 48),
         child: Column(
@@ -65,12 +59,15 @@ class _ProfilePageState extends State<ProfilePage> {
           children: [
             Text(
               'About',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white),
             ),
             const SizedBox(height: 16),
             Text(
               user.about,
-              style: TextStyle(fontSize: 16, height: 1.4),
+              style: TextStyle(fontSize: 16, height: 1.4, color: Colors.white),
             ),
           ],
         ),

@@ -3,12 +3,13 @@ import 'package:ta_mdp/widgets/stock_list.dart';
 import 'package:ta_mdp/models/stock.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
+
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,39 +55,6 @@ class _HomePageState extends State<HomePage> {
                   ]),
             ))
       ]),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black,
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.white,
-              ),
-              label: ('Home'),
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.insert_chart_rounded,
-                color: Colors.white,
-              ),
-              label: ('News'),
-              backgroundColor: Colors.black),
-          BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person,
-                color: Colors.white,
-              ),
-              label: ('Profile'),
-              backgroundColor: Colors.black)
-        ],
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-      ),
     );
   }
 }
