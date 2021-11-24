@@ -26,6 +26,7 @@ class _NewsListState extends State<NewsList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: const Text('Market News'),
       ),
       body: Column(
