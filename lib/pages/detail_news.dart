@@ -1,21 +1,26 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'dart:async';
-import 'home_page.dart';
 
-class DetailPage extends StatefulWidget {
+import 'package:ta_mdp/pages/home_page.dart';
+
+class DetailAir extends StatefulWidget {
   final String title;
-  final String urlToImage;
-  const DetailPage({Key? key, required this.title, required this.urlToImage})
-      : super(key: key);
+  const DetailAir({Key? key, required this.title}) : super(key: key);
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  State<DetailAir> createState() => _DetailAirState();
 }
 
-class _DetailPageState extends State<DetailPage> {
+class _DetailAirState extends State<DetailAir> {
   late Future<Desc> detailNews;
+
+  @override
+  void initState() {
+    super.initState();
+    detailNews = fetchDesc();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +60,7 @@ class _DetailPageState extends State<DetailPage> {
                                   fontWeight: FontWeight.bold, fontSize: 12),
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 14,
                             ),
                             Text(
                               snapshot.data!.description,
@@ -78,32 +83,34 @@ class _DetailPageState extends State<DetailPage> {
 
 class Desc {
   final String title;
-  final String urlToImage;
   final String description;
+  final String urlToImage;
 
   Desc({
     required this.title,
-    required this.urlToImage,
     required this.description,
+    required this.urlToImage,
   });
 
   factory Desc.fromJson(Map<String, dynamic> json) {
     return Desc(
       title: json['title'],
-      urlToImage: json['urlToImage'],
       description: json['description'],
+      urlToImage: json['urlToImage'],
     );
   }
 }
 
-Future<Desc> fetchDesc(id) async {
+Future<Desc> fetchDesc() async {
   final response = await http.get(Uri.parse(
-      'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=efb24ab02e314ba2a2dbea4dcd0d92a2'));
+      'https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=efb24ab02e314ba2a2dbea4dcd0d92a2'));
 
   if (response.statusCode == 200) {
-    var synopsisJson = jsonDecode(response.body);
-    return Desc.fromJson(synopsisJson);
+    var articleDescJson = jsonDecode(response.body)['articles'] as List;
+    return articleDescJson
+        .map((detailNews) => Desc.fromJson(detailNews))
+        .toList();
   } else {
-    throw Exception('Failed to load episodes');
+    throw Exception('Failed to load shows');
   }
 }

@@ -55,10 +55,8 @@ class _NewsListState extends State<NewsList> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => DetailPage(
+                                    builder: (context) => DetailAir(
                                           title: snapshot.data![index].title,
-                                          urlToImage:
-                                              snapshot.data![index].urlToImage,
                                         )));
                           },
                           child: Container(
@@ -115,14 +113,12 @@ class _NewsListState extends State<NewsList> {
                           child: InkWell(
                             onTap: () {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailDomestic(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => DetailAir(
                                       title: snapshot.data![index].title,
-                                      imageToUrl:
-                                          snapshot.data![index].urlToImage),
-                                ),
-                              );
+                                    ),
+                                  ));
                             },
                             child: Container(
                               width: double.infinity,
@@ -178,11 +174,11 @@ class Show {
 
 Future<List<Show>> fetchShows() async {
   final response = await http.get(Uri.parse(
-      'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=efb24ab02e314ba2a2dbea4dcd0d92a2'));
+      'https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=efb24ab02e314ba2a2dbea4dcd0d92a2'));
 
   if (response.statusCode == 200) {
-    var articleShowsJson = jsonDecode(response.body)['article'] as List;
-    return articleShowsJson.map((show) => Show.fromJson(show)).toList();
+    var articleShowsJson = jsonDecode(response.body)['articles'] as List;
+    return articleShowsJson.map((shows) => Show.fromJson(shows)).toList();
   } else {
     throw Exception('Failed to load shows');
   }
@@ -207,7 +203,7 @@ Future<List<Shows>> fetchShow() async {
       'https://newsapi.org/v2/top-headlines?country=id&category=business&apiKey=efb24ab02e314ba2a2dbea4dcd0d92a2'));
 
   if (response.statusCode == 200) {
-    var articleShowsJson = jsonDecode(response.body)['article'] as List;
+    var articleShowsJson = jsonDecode(response.body)['articles'] as List;
     return articleShowsJson.map((showair) => Shows.fromJson(showair)).toList();
   } else {
     throw Exception('Failed to load shows');
